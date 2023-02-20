@@ -7,45 +7,54 @@
 */
 /* eslint-enable max-len */
 // set our first slide's position to "0", the opening position in an array
-const slidePosition = 0;
+let slidePosition = 0;
 
 // gather a reference to every slide we're using via the class name and querySelectorAll
-const slides = document.querySelectorAll('.carousel_item');
+let slides = document.querySelectorAll('.carousel_item');
 
 // change that "NodeList" into a Javascript "array", to get access to "array methods"
-const slidesArray = Array.from(slides);
+let slidesArray = Array.from(slides);
 
 // Figure out how many slides we have available
-const totalSlides = slidesArray.length;
+let totalSlides = slidesArray.length;
 
 function updateSlidePosition() {
-  // Using the .forEach array method, (array.forEach((element) => { per-element work goes here }))
-  // loop through all the slides in your slideArray
-  // and remove the 'visible' class from each classList
-  // then add a class 'hidden' to all of them
+  // Loop through all slides and hide them
+  slidesArray.forEach((slide) => {
+    slide.classList.remove('visible');
+    slide.classList.add('hidden');
+  });
 
-  // outside your .forEach,
-  // add a 'visible' class to the slide at the current slidePosition in slides
+  // Add visible class to current slide
+  slidesArray[slidePosition].classList.add('visible');
 }
 
 function moveToNextSlide() {
-  /*
-    add an if statement here that checks
-    if you're already at the max number of slides
-    and if so, sets your slidePosition to the first index of an array
-    if not, set the slidePosition to the current position plus one
-  */
-  updateSlidePosition(); // this is how you call a function within a function
-}
-function moveToPrevSlide() {
-  // add your code in here for when you click the "prev" button
-  /*
-    add an if statement here that checks
-    if you're already at the first index position for an array
-    and if so, sets your slidePosition to the last slide position in totalSlides
-    if not, set the slidePosition to the current position minus one
-  */
+  // check if at max number of slides
+  if (slidePosition === totalSlides - 1) {
+    // if so, goes back to first slide
+    slidePosition = 0;
+  } else {
+    // otherwise, goes to the next slide
+    slidePosition += 1;
+  }
+  // call function to update display
   updateSlidePosition();
+}
+
+function moveToPrevSlide() {
+  // checks if at first index
+    if (slidePosition === 0) {
+      // if so goes to last slide
+      slidePosition = totalSlides - 1;
+    } else {
+      // otherwise, goes to prev slide
+      slidePosition -= 1;
+    }
+    // sends position to console
+    console.log(slidePosition)
+    // call function to update display
+    updateSlidePosition();
 }
 
 /*
@@ -60,3 +69,9 @@ document.querySelector('.next') // Get the appropriate element (<button class="n
 
 // Paying close attention to the above queryselector, write one that fires
 // when you want a "prev" slide
+
+document.querySelector('.prev') // Get the appropriate element (<button class="prev">)
+  .addEventListener('click', () => { // set an event listener on it - when it's clicked, do this callback function
+    console.log('clicked prev'); // let's tell the client console we made it to this point in the script
+    moveToPrevSlide(); // call the function above to handle this
+  });
