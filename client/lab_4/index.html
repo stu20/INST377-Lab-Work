@@ -8,3 +8,47 @@
 <!-- If you open /routes/apiRoutes and go to line 38 you will find the server side answer to your request! -->
 
 <!-- This week doesn't have a script.js file in it, because you're focusing on HTML and CSS -->
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stu20 Lab 4</title>
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <div class="header">
+            <h1>Sonny's Labs For INST377</h1>
+        </div> 
+
+        <div class="container">
+            <div class="left_section box">
+                <h2>Form Inputs</h2>
+                <div class="box">
+                    <h3>Restaurant Name</h3>
+                    <form action="https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json" method="GET">
+                        <input type="text" id="resto" name="resto">
+                        <button id="submitBtn" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="right_section box">
+                <h2>Local Restaurants</h2>
+                <div class="box">
+                    <ul id="name"></ul>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>My GitHub Account Name: <a href="https://github.com/stu20">stu20</a></p>
+        </footer>
+    </div>    
+
+</body>
+</html>
+
