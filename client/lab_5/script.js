@@ -6,18 +6,19 @@
 // Set currentList to an empty array
 let currentList = [];
 
-function filterList(keyword, list) {
-  const RestaurantList = currentList.filter((restaurant) => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+
+function filterList(currentList) {
+  const restoList = currentList.filter((keyword) => {
+    return restaurant.name.includes(keyword)
   });
-  return RestaurantList
+  return restoList
 }
 
 async function mainEvent() { // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
-  form.addEventListener('submit', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
+  form.addEventListener('button', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
     submitEvent.preventDefault(); // This prevents your page from going to http://localhost:3000/api even if your form still has an action set on it
-    console.log('form submission'); // this is substituting for a "breakpoint"
+    console.log('Form Submission'); // this is substituting for a "breakpoint"
 
     /*
       ## GET requests and Javascript
@@ -63,7 +64,7 @@ async function mainEvent() { // the async keyword means we can make API requests
     // This changes the response from the GET into data we can use - an "object"
     const arrayFromJson = await results.json();
     currentList = arrayFromJson;
-    const RestaurantList = filterList(formProps)
+    const restoList = filterList(formProps)
     console.table(arrayFromJson.data); // this is called "dot notation"
     // arrayFromJson.data - we're accessing a key called 'data' on the returned object
     // it initially contains all 1,000 records from your request
