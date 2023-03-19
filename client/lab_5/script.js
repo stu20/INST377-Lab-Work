@@ -11,13 +11,13 @@ function filterList(list, query) {
     to the query in lower case
     Ask the TAs if you need help with this
   */
- return list.filter(item => item.name.tolowercase().includes(query.tolowercase()));
+ return list.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
 }
 
 async function mainEvent() { // the async keyword means we can make API requests
   const mainForm = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
   // Add a querySelector that targets your filter button here
-  const filterButton = document.querySelector('filterBtn');
+  const filterButton = document.querySelector('.filterBtn');
 
   let currentList = []; // this is "scoped" to the main event function
   
@@ -52,15 +52,15 @@ async function mainEvent() { // the async keyword means we can make API requests
       but it will only be defined _after_ the request resolves - any filtering on it before that
       simply won't work.
     */
-    console.table(currentList); 
+    //console.table(currentList); 
   });
 
   filterButton.addEventListener('click', () => {
     const formData = new FormData(mainForm);
-    const queryObject = Object.fromEntries(formData.entries());
-    const query = queryObject.query;
-    const filteredList = filterList(currentList, query);
-    console.table(filteredList);
+    const formProps = Object.fromEntries(formData);
+    console.log(formProps);
+    const filteredList = filterList(currentList, formProps.resto);
+    console.log(filteredList);
   });
 
   /*

@@ -25,10 +25,11 @@
                 <h2>Form Inputs</h2>
                 <div class="box">
                     <h3>Restaurant Name</h3>
-                    <form class="main_form">
-                        <input type="text" id="input" name="input">
-                        <button id="loadBtn" class="loadBtn" type="button">load data</button>
-                        <button id="filterBtn" class="filterBtn" type="button">filter data</button>
+                    <form action="https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json" class="main_form">
+                        <label for="resto"></label>
+                        <input type="text" id="resto" name="resto">
+                        <button type="submit">load data</button>
+                        <button type="button" class="filterBtn">filter data</button>
                     </form>
 
                 </div>
