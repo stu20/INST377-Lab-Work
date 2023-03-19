@@ -52,7 +52,7 @@ async function mainEvent() { // the async keyword means we can make API requests
       but it will only be defined _after_ the request resolves - any filtering on it before that
       simply won't work.
     */
-    //console.table(currentList); 
+    console.table(currentList); 
   });
 
   filterButton.addEventListener('click', () => {

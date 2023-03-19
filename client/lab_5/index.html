@@ -1,9 +1,3 @@
-<!-- Bring in your successful HTML/CSS from the Flexbox lab -->
-<!-- Your page will need a form in it with an 'action' to /api and a single text field with an id/name of "resto" -->
-<!-- If you open /routes/apiRoutes and go to line 38 you will find the server side answer to your request! -->
-
-<!-- Temporarily unhook your script.js file from your main index file -->
-
 <html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -14,7 +8,6 @@
 </head>
 <body>
 
-
     <div class="wrapper">
         <div class="header">
             <h1>Sonny's Labs For INST377</h1>
@@ -23,21 +16,20 @@
         <div class="container">
             <div class="left_section box">
                 <h2>Form Inputs</h2>
-                <div class="box">
-                    <h3>Restaurant Name</h3>
-                    <form action="https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json" class="main_form">
-                        <label for="resto"></label>
+                <form class="box main_form">
+                    <div>
+                        <label for="resto">Restaurant Name</label>
                         <input type="text" id="resto" name="resto">
-                        <button type="submit">load data</button>
-                        <button type="button" class="filterBtn">filter data</button>
-                    </form>
-
-                </div>
+                    </div>
+                        <div class="buttons">
+                            <button type="submit">load data</button>
+                            <button type="button" class="filterBtn">filter data</button>
+                        </div>
+                </form>
             </div>
-
             <div class="right_section box">
                 <h2>Local Restaurants</h2>
-                <div class="box" id="results">
+                <div class="box" id="restaurant_list">
                 </div>
             </div>
         </div>
