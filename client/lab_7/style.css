@@ -180,6 +180,10 @@ form input {
   That serves to cram the footer to the bottom of the page.
   */
   
+  .hidden {
+    display: none;
+  }
+
   .footer {
   position: fixed;
   bottom: 0;

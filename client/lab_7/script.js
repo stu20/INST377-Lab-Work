@@ -28,23 +28,18 @@ function getRandomIntInclusive(min, max) {
   return list.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
   }
 
-  function filterListTwo(array, filterInputValue) {
-    const newArray = array.filter((item) => {
-        const lowerCaseName = item.name.toLowerCase();
-        const lowerCaseQuery = filterInputValue.toLowerCase();
-        return lowerCaseName.includes(lowerCaseQuery);
-    })
-    return newArray
-  }
-  
   async function mainEvent() { // the async keyword means we can make API requests
     const mainForm = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
     const filterButton = document.querySelector('#filter');
     const loadDataButton = document.querySelector('#data_load');
     const generateListButton = document.querySelector('#generate');
-  
+    const textField = document.querySelector("#resto");
+
     const loadAnimation = document.querySelector('#data_load_animation');
     loadAnimation.style.display = 'none';
+    generateListButton.classList.add('hidden')
+
+    let storedList = [];
     let currentList = []; // this is "scoped" to the main event function
     
     loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
@@ -54,32 +49,45 @@ function getRandomIntInclusive(min, max) {
   
       const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   
-      currentList = await results.json();
+      storedList = await results.json();
+      //currentList = await results.json();
+
+      if (storedList.length > 0) {
+        generateListButton.classList.remove('hidden')
+      }
+
       loadAnimation.style.display = 'none';
-      console.table(currentList);
-      injectHTML(currentList) 
+      console.table(storedList);
     });
   
     filterButton.addEventListener('click', (event) => {
-      console.log('clicked filterButton')
+      console.log('clicked filterButton');
+
       const formData = new FormData(mainForm);
       const formProps = Object.fromEntries(formData);
+
       console.log(formProps);
-      const filteredList = filterList(currentList, formProps.resto);
+      const filteredList = filterList(storedList, formProps.resto);
+
       console.log(filteredList);
       injectHTML(filteredList);
     });
-
-    form.addEventListener('input', (event) => {
-        console.log(event.target.value);
-        const latestList = filterListTwo(filteredList, event.target.value);
-        injectHTML(latestList);
-    })
   
     generateListButton.addEventListener('click', (event) => {
       console.log('generate new list')
-      const restaurantsList = cutRestaurantList(currentList);
-      injectHTML(restaurantsList);
+      currentList = cutRestaurantList(storedList);
+    
+      console.log(currentList);
+      injectHTML(currentList);
+    });
+
+    textField.addEventListener('input', (event) => {
+      console.log('input', event.target.value);
+      const newList = filterList(storedList, event.target.value);
+      
+      console.log(newList);
+      injectHTML(newList);
     });
   }
+
   document.addEventListener('DOMContentLoaded', async () => mainEvent()); // the async keyword means we can make API requests
