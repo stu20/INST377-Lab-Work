@@ -9,6 +9,26 @@ function initMap() {
     return map;
 }
 
+function markerPlace(coordsArray, map) {
+  // remove existing markers from the map
+  map.eachLayer(function(layer) {
+    if (layer instanceof L.Marker) {
+      map.removeLayer(layer);
+    }
+  });
+  
+  // add a marker for each set of coordinates in the array
+  coordsArray.forEach(function(coords) {
+    var latlng = L.latLng(coords[1], coords[0]);
+    var marker = L.marker(latlng).addTo(map);
+  });
+  
+  // pan the map to the first set of coordinates in the array
+  var firstCoords = coordsArray[0];
+  var firstLatlng = L.latLng(firstCoords[1], firstCoords[0]);
+  map.panTo(firstLatlng);
+}
+
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -54,6 +74,8 @@ function getRandomIntInclusive(min, max) {
     let currentList = []; // this is "scoped" to the main event function
 
     var map = initMap();
+    var coordsArray = [newList];
+    markerPlace(coordsArray, map);
 
     // wait for the map to load
     await new Promise(resolve => map.on('load', resolve));
