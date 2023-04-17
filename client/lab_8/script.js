@@ -99,7 +99,7 @@
       // Unable to get the code to pan at the moment. Will debug. Maybe setView is overriding panTo method?
       if (filteredList[0].latitude && filteredList[0].longitude) {
         map.panTo({ lat: filteredList[0].latitude, lng: filteredList[0].longitude });
-      };
+      }
     }); 
   
     generateListButton.addEventListener('click', (event) => {
